@@ -1,0 +1,11 @@
+def calculate_cash_flow(income, expenses):
+    cash_flow = income - expenses
+    return cash_flow
+
+# Example values for a month
+monthly_income = 5000
+monthly_expenses = 3000
+
+# Calculate cash flow
+monthly_cash_flow = calculate_cash_flow(monthly_income, monthly_expenses)
+print(f"The monthly cash flow is: ${monthly_cash_flow}")

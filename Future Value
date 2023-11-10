@@ -1,0 +1,13 @@
+def calculate_future_value(rate, periods, payment, present_value):
+    fv = present_value * (1 + rate) ** periods + payment * ((1 + rate) ** periods - 1) / rate
+    return fv
+
+# Example values
+interest_rate = 0.06  # 6% interest rate
+investment_periods = 5  # 5 investment periods
+regular_payment = 200  # Regular investment or loan payment
+initial_investment = 1000  # Initial investment amount
+
+# Calculating the future value
+future_value = calculate_future_value(interest_rate, investment_periods, regular_payment, initial_investment)
+print(f"The future value after {investment_periods} periods is: ${round(future_value, 2)}")
