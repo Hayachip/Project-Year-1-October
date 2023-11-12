@@ -2,19 +2,27 @@ import tkinter as tk
 from tkinter import messagebox
 
 def calculate_pmt(rate, periods, present_value):
-    rate = float(rate) / 100
-    periods = int(periods)
-    present_value = float(present_value)
-    pmt = (rate * present_value) / (1 - (1 + rate) ** -periods)
-    return pmt
+    try:
+        rate = float(rate) / 100
+        periods = int(periods)
+        present_value = float(present_value)
+        pmt = (rate * present_value) / (1 - (1 + rate) ** -periods)
+        return pmt
+    except ValueError:
+        messagebox.showerror("Error, Please enter only number values.")
+        return None
 
 def calculate_future_value(rate, periods, payment, present_value):
-    rate = float(rate) / 100
-    periods = int(periods)
-    payment = float(payment)
-    present_value = float(present_value)
-    fv = present_value * (1 + rate) ** periods + payment * ((1 + rate) ** periods - 1) / rate
-    return fv
+    try:
+        rate = float(rate) / 100
+        periods = int(periods)
+        payment = float(payment)
+        present_value = float(present_value)
+        fv = present_value * (1 + rate) ** periods + payment * ((1 + rate) ** periods - 1) / rate
+        return fv
+    except ValueError:
+        messagebox.showerror("Error, Please enter only number values.")
+        return None
 
 def calculate_cash_flow(income_list, expense_list):
     total_income = sum(income_list)
@@ -100,7 +108,7 @@ def get_choice():
                     try:
                         income.append(float(value))
                     except ValueError:
-                        messagebox.showerror("Error", "Please enter only value for income.")
+                        messagebox.showerror("Error, Please enter only number values for income.")
                         return
 
             for entry in expense_entries:
@@ -109,7 +117,7 @@ def get_choice():
                     try:
                         expenses.append(float(value))
                     except ValueError:
-                        messagebox.showerror("Error", "Please enter only value for expenses.")
+                        messagebox.showerror("Error, Please enter only number values for expenses.")
                         return
 
             free_cash_flow = calculate_cash_flow(income, expenses)
