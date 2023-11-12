@@ -9,7 +9,7 @@ def calculate_pmt(rate, periods, present_value):
         pmt = (monthly_rate * present_value) / (1 - (1 + monthly_rate) ** -periods)
         return pmt
     except ValueError:
-        messagebox.showerror("Error, Please enter only number values.")
+        messagebox.showerror("Error", "Please enter only number values.")
         return None
 
 def calculate_future_value(rate, periods, payment, present_value):
@@ -21,7 +21,7 @@ def calculate_future_value(rate, periods, payment, present_value):
         fv = present_value * (1 + monthly_rate) ** periods + payment * ((1 + monthly_rate) ** periods - 1) / monthly_rate
         return fv
     except ValueError:
-        messagebox.showerror("Error, Please enter only number values.")
+        messagebox.showerror("Error", "Please enter only number values.")
         return None
 
 def calculate_cash_flow(income_list, expense_list):
@@ -108,7 +108,7 @@ def get_choice():
                     try:
                         income.append(float(value))
                     except ValueError:
-                        messagebox.showerror("Error, Please enter only number values for income.")
+                        messagebox.showerror("Error", "Please enter only number values for income.")
                         return
 
             for entry in expense_entries:
@@ -117,7 +117,7 @@ def get_choice():
                     try:
                         expenses.append(float(value))
                     except ValueError:
-                        messagebox.showerror("Error, Please enter only number values for expenses.")
+                        messagebox.showerror("Error", "Please enter only number values for expenses.")
                         return
 
             free_cash_flow = calculate_cash_flow(income, expenses)
