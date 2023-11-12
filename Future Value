@@ -1,12 +1,21 @@
 def calculate_future_value(rate, periods, payment, present_value):
-    fv = present_value * (1 + rate) ** periods + payment * ((1 + rate) ** periods - 1) / rate
-    return fv
+    try:
+        monthly_rate = float(rate) / (12 * 100)
+        periods = int(periods)
+        payment = float(payment)
+        present_value = float(present_value)
+        fv = present_value * (1 + monthly_rate) ** periods + payment * ((1 + monthly_rate) ** periods - 1) / monthly_rate
+        return fv
+    except ValueError:
+        print("Error, Please enter only number values.")
+        return None
+
 
 # Example values
-interest_rate = float(input("Enter your interest rate in percent"))/12*100
-investment_periods = int(input("Enter your periods in month"))
-regular_payment = float(input("Enter your regular payment amount"))/100
-initial_investment = float(input("Enter your initial saving amount"))/100
+interest_rate = input("Enter your interest rate in percent")
+investment_periods = input("Enter your periods in month")
+regular_payment = input("Enter your regular payment amount")
+initial_investment = input("Enter your initial saving amount")
 
 # Calculating the future value
 future_value = calculate_future_value(interest_rate, investment_periods, regular_payment, initial_investment)
