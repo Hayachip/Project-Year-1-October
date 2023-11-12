@@ -135,7 +135,7 @@ def get_choice():
             num_income = int(num_income_sources.get())
             num_expense = int(num_expense_sources.get())
 
-            income_label = tk.Label(input_window, text="Enter the number of maximum sources (Income/Expense)")
+            income_label = tk.Label(input_window, text="Enter the number of maximum income sources")
             income_label.pack()
 
             for i in range(num_income):
@@ -143,7 +143,7 @@ def get_choice():
                 income_entry.pack()
                 income_entries.append(income_entry)
 
-            expense_label = tk.Label(input_window, text="Enter the number of maximum sources (Income/Expense)")
+            expense_label = tk.Label(input_window, text="Enter the number of maximum expense sources")
             expense_label.pack()
 
             for i in range(num_expense):
@@ -157,13 +157,13 @@ def get_choice():
         income_entries = []
         expense_entries = []
 
-        num_sources_label = tk.Label(input_window, text="Enter the number of maximum sources (Income/Expense)")
+        num_sources_label = tk.Label(input_window, text="Enter the number of maximum income sources")
         num_sources_label.pack()
 
         num_sources_entry = tk.Entry(input_window, textvariable=num_income_sources)
         num_sources_entry.pack()
 
-        num_sources_label = tk.Label(input_window, text="Enter the number of maximum sources (Income/Expense)")
+        num_sources_label = tk.Label(input_window, text="Enter the number of maximum expense sources")
         num_sources_label.pack()
 
         num_sources_entry = tk.Entry(input_window, textvariable=num_expense_sources)
@@ -178,18 +178,17 @@ def get_choice():
 # main UI
 root = tk.Tk()
 root.title("Financial Calculator")
-root.geometry("400x300")  # Width x Height
+root.geometry("400x300")
 
-# instruction
-instruction_label = tk.Label(root, text="Select your financial calculation")
-instruction_label.pack()
+main_label = tk.Label(root, text="Select your financial calculation")
+main_label.pack()
 
 # Choices
 choices = ["Loan payment (Payment)", "Bank Saving (Future Value)","Free Cash Flow Calculator"]
 
 # Variable to hold the selected choice
 variable = tk.StringVar(root)
-variable.set(choices[0])  # Set default choice
+variable.set(choices[0])
 
 # dropdown menu
 option_menu = tk.OptionMenu(root, variable, *choices)
