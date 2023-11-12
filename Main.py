@@ -132,10 +132,14 @@ def get_choice():
         num_expense_sources = tk.StringVar()
 
         def get_num_sources():
-            num_income = int(num_income_sources.get())
-            num_expense = int(num_expense_sources.get())
+            try:
+                num_income = int(num_income_sources.get())
+                num_expense = int(num_expense_sources.get())
+            except ValueError:
+                messagebox.showerror("Error", "Please enter only number values.")
+                return None
 
-            income_label = tk.Label(input_window, text="Enter the number of maximum income sources")
+            income_label = tk.Label(input_window, text="Maximum income sources")
             income_label.pack()
 
             for i in range(num_income):
@@ -143,7 +147,7 @@ def get_choice():
                 income_entry.pack()
                 income_entries.append(income_entry)
 
-            expense_label = tk.Label(input_window, text="Enter the number of maximum expense sources")
+            expense_label = tk.Label(input_window, text="Maximum expense sources")
             expense_label.pack()
 
             for i in range(num_expense):
@@ -171,9 +175,6 @@ def get_choice():
 
         num_sources_button = tk.Button(input_window, text="Submit", command=get_num_sources)
         num_sources_button.pack()
-        
-    else:
-        messagebox.showinfo("Selected Choice", f"You selected: {selected_choice}")
 
 # main UI
 root = tk.Tk()
