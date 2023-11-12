@@ -1,11 +1,23 @@
-def calculate_cash_flow(income, expenses):
-    cash_flow = income - expenses
+def calculate_cash_flow(income_list, expense_list):
+    total_income = sum(income_list)
+    total_expense = sum(expense_list)
+    cash_flow = total_income - total_expense
     return cash_flow
 
-# Example values for a month
-monthly_income = 5000
-monthly_expenses = 3000
+# Input for income list
+income = []
+num_income = int(input("Enter the number of income sources: "))
+for i in range(num_income):
+    value = float(input(f"Enter the value of income {i+1}: "))
+    income.append(value)
 
-# Calculate cash flow
-monthly_cash_flow = calculate_cash_flow(monthly_income, monthly_expenses)
-print(f"The monthly cash flow is: ${monthly_cash_flow}")
+# Input for expense list
+expenses = []
+num_expenses = int(input("Enter the number of expenses: "))
+for i in range(num_expenses):
+    value = float(input(f"Enter the value of expense {i+1}: "))
+    expenses.append(value)
+
+# Calculating the Cash Flow
+cash_flow_result = calculate_cash_flow(income, expenses)
+print(f"The Cash Flow is: {cash_flow_result}")

@@ -16,6 +16,12 @@ def calculate_future_value(rate, periods, payment, present_value):
     fv = present_value * (1 + rate) ** periods + payment * ((1 + rate) ** periods - 1) / rate
     return fv
 
+def calculate_cash_flow(income_list, expense_list):
+    total_income = sum(income_list)
+    total_expense = sum(expense_list)
+    cash_flow = total_income - total_expense
+    return cash_flow
+
 def get_choice():
     selected_choice = variable.get()
     if selected_choice == "Loan payment (Payment)":
@@ -88,6 +94,73 @@ def get_choice():
         calculate_future_button = tk.Button(future_window, text="Calculate", command=calculate_future)
         calculate_future_button.pack()
 
+    elif selected_choice == "Free Cash Flow Calculator":
+        def calculate_free_cash_flow():
+            income = []
+            expenses = []
+
+            for entry in income_entries:
+                value = entry.get()
+                if value:
+                    try:
+                        income.append(float(value))
+                    except ValueError:
+                        messagebox.showerror("Error", "Please enter valid numerical values for income.")
+                        return
+
+            for entry in expense_entries:
+                value = entry.get()
+                if value:
+                    try:
+                        expenses.append(float(value))
+                    except ValueError:
+                        messagebox.showerror("Error", "Please enter valid numerical values for expenses.")
+                        return
+
+            free_cash_flow = calculate_cash_flow(income, expenses)
+            if free_cash_flow>0:
+                messagebox.showinfo("Calculation Result", f"The Free Cash Flow is: {free_cash_flow}")
+            else:
+                messagebox.showinfo("Calculation Result", f"There is no Free Cash Flow, The Negative Cash Flow is: {abs(free_cash_flow)}")
+
+        input_window = tk.Toplevel(root)
+        input_window.title("Free Cash Flow Calculator")
+
+        num_income_sources = tk.StringVar()
+
+        def get_num_sources():
+            num_sources = int(num_income_sources.get())
+            income_label = tk.Label(input_window, text="Enter Income Sources:")
+            income_label.pack()
+
+            for i in range(num_sources):
+                income_entry = tk.Entry(input_window)
+                income_entry.pack()
+                income_entries.append(income_entry)
+
+            expense_label = tk.Label(input_window, text="Enter Expenses:")
+            expense_label.pack()
+
+            for i in range(num_sources):
+                expense_entry = tk.Entry(input_window)
+                expense_entry.pack()
+                expense_entries.append(expense_entry)
+
+            calculate_button = tk.Button(input_window, text="Calculate", command=calculate_free_cash_flow)
+            calculate_button.pack()
+
+        income_entries = []
+        expense_entries = []
+
+        num_sources_label = tk.Label(input_window, text="Enter the number of income sources:")
+        num_sources_label.pack()
+
+        num_sources_entry = tk.Entry(input_window, textvariable=num_income_sources)
+        num_sources_entry.pack()
+
+        num_sources_button = tk.Button(input_window, text="Submit", command=get_num_sources)
+        num_sources_button.pack()
+        
     else:
         messagebox.showinfo("Selected Choice", f"You selected: {selected_choice}")
 
@@ -101,7 +174,7 @@ instruction_label = tk.Label(root, text="Select your financial calculation")
 instruction_label.pack()
 
 # Choices available
-choices = ["Loan payment (Payment)", "Bank Saving (Future Value)"]
+choices = ["Loan payment (Payment)", "Bank Saving (Future Value)","Free Cash Flow Calculator"]
 
 # Create a variable to hold the selected choice
 variable = tk.StringVar(root)
