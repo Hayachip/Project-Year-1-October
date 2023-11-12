@@ -3,10 +3,10 @@ from tkinter import messagebox
 
 def calculate_pmt(rate, periods, present_value):
     try:
-        rate = float(rate) / 100
+        monthly_rate = float(rate) / (12 * 100)
         periods = int(periods)
         present_value = float(present_value)
-        pmt = (rate * present_value) / (1 - (1 + rate) ** -periods)
+        pmt = (monthly_rate * present_value) / (1 - (1 + monthly_rate) ** -periods)
         return pmt
     except ValueError:
         messagebox.showerror("Error, Please enter only number values.")
@@ -14,11 +14,11 @@ def calculate_pmt(rate, periods, present_value):
 
 def calculate_future_value(rate, periods, payment, present_value):
     try:
-        rate = float(rate) / 100
-        periods = int(periods)
-        payment = float(payment)
-        present_value = float(present_value)
-        fv = present_value * (1 + rate) ** periods + payment * ((1 + rate) ** periods - 1) / rate
+        monthly_rate = float(rate) / (12 * 100)  # Monthly interest rate
+        periods = int(periods)  # Number of periods
+        payment = float(payment)  # Monthly payment
+        present_value = float(present_value)  # Present value
+        fv = present_value * (1 + monthly_rate) ** periods + payment * ((1 + monthly_rate) ** periods - 1) / monthly_rate
         return fv
     except ValueError:
         messagebox.showerror("Error, Please enter only number values.")
