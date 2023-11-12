@@ -100,7 +100,7 @@ def get_choice():
                     try:
                         income.append(float(value))
                     except ValueError:
-                        messagebox.showerror("Error", "Please enter valid numerical values for income.")
+                        messagebox.showerror("Error", "Please enter only value for income.")
                         return
 
             for entry in expense_entries:
@@ -109,7 +109,7 @@ def get_choice():
                     try:
                         expenses.append(float(value))
                     except ValueError:
-                        messagebox.showerror("Error", "Please enter valid numerical values for expenses.")
+                        messagebox.showerror("Error", "Please enter only value for expenses.")
                         return
 
             free_cash_flow = calculate_cash_flow(income, expenses)
