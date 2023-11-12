@@ -37,7 +37,6 @@ def get_choice():
             interest_rate = interest_entry.get()
             loan_periods = periods_entry.get()
             principal = principal_entry.get()
-            # Calculating the PMT
             monthly_payment = calculate_pmt(interest_rate, loan_periods, principal)
             messagebox.showinfo("Calculation Result", f"The monthly payment (PMT) for the loan is: {round(monthly_payment, 2)}")
 
