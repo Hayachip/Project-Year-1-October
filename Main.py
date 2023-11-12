@@ -14,10 +14,10 @@ def calculate_pmt(rate, periods, present_value):
 
 def calculate_future_value(rate, periods, payment, present_value):
     try:
-        monthly_rate = float(rate) / (12 * 100)  # Monthly interest rate
-        periods = int(periods)  # Number of periods
-        payment = float(payment)  # Monthly payment
-        present_value = float(present_value)  # Present value
+        monthly_rate = float(rate) / (12 * 100)
+        periods = int(periods)
+        payment = float(payment)
+        present_value = float(present_value)
         fv = present_value * (1 + monthly_rate) ** periods + payment * ((1 + monthly_rate) ** periods - 1) / monthly_rate
         return fv
     except ValueError:
