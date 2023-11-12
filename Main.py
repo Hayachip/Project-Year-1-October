@@ -136,7 +136,7 @@ def get_choice():
                 num_income = int(num_income_sources.get())
                 num_expense = int(num_expense_sources.get())
             except ValueError:
-                messagebox.showerror("Error", "Please enter only number values.")
+                messagebox.showerror("Error", "Please enter only positive integer number values.")
                 return None
 
             income_label = tk.Label(input_window, text="Maximum income sources")
