@@ -25,7 +25,6 @@ def calculate_cash_flow(income_list, expense_list):
 def get_choice():
     selected_choice = variable.get()
     if selected_choice == "Loan payment (Payment)":
-        # Function to perform the calculation
         def calculate():
             interest_rate = interest_entry.get()
             loan_periods = periods_entry.get()
@@ -34,11 +33,9 @@ def get_choice():
             monthly_payment = calculate_pmt(interest_rate, loan_periods, principal)
             messagebox.showinfo("Calculation Result", f"The monthly payment (PMT) for the loan is: {round(monthly_payment, 2)}")
 
-        # Create a new window for input
         input_window = tk.Toplevel(root)
         input_window.title("Loan Payment Details")
 
-        # Labels and Entry fields for user input
         interest_label = tk.Label(input_window, text="Enter your interest rate in percent")
         interest_label.pack()
         interest_entry = tk.Entry(input_window)
@@ -66,11 +63,9 @@ def get_choice():
             future_value = calculate_future_value(interest_rate, investment_periods, regular_payment, initial_investment)
             messagebox.showinfo("Calculation Result", f"The future value after {investment_periods} periods is: {round(future_value, 2)}")
 
-        # Create a new window for future value input
         future_window = tk.Toplevel(root)
         future_window.title("Future Value Details")
 
-        # Labels and Entry fields for future value user input
         interest_label = tk.Label(future_window, text="Enter your interest rate in percent")
         interest_label.pack()
         interest_entry = tk.Entry(future_window)
@@ -164,23 +159,23 @@ def get_choice():
     else:
         messagebox.showinfo("Selected Choice", f"You selected: {selected_choice}")
 
-# Create the main window
+# main UI
 root = tk.Tk()
 root.title("Financial Calculator")
 root.geometry("400x300")  # Width x Height
 
-# Label for instruction
+# instruction
 instruction_label = tk.Label(root, text="Select your financial calculation")
 instruction_label.pack()
 
-# Choices available
+# Choices
 choices = ["Loan payment (Payment)", "Bank Saving (Future Value)","Free Cash Flow Calculator"]
 
-# Create a variable to hold the selected choice
+# Variable to hold the selected choice
 variable = tk.StringVar(root)
 variable.set(choices[0])  # Set default choice
 
-# Create the dropdown menu
+# dropdown menu
 option_menu = tk.OptionMenu(root, variable, *choices)
 option_menu.pack()
 
@@ -188,5 +183,4 @@ option_menu.pack()
 select_button = tk.Button(root, text="Select", command=get_choice)
 select_button.pack()
 
-# Run the main loop
 root.mainloop()
