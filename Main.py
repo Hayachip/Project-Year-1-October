@@ -121,30 +121,33 @@ def get_choice():
                         return
 
             free_cash_flow = calculate_cash_flow(income, expenses)
-            if free_cash_flow>0:
+            if free_cash_flow > 0:
                 messagebox.showinfo("Calculation Result", f"The Free Cash Flow is: {free_cash_flow}")
             else:
-                messagebox.showinfo("Calculation Result", f"There is no Free Cash Flow, The Negative Cash Flow is: {abs(free_cash_flow)}")
+                messagebox.showinfo("Calculation Result", f"There is Negative Cash Flow, The Negative Cash Flow is: {abs(free_cash_flow)}")
 
         input_window = tk.Toplevel(root)
         input_window.title("Free Cash Flow Calculator")
 
         num_income_sources = tk.StringVar()
+        num_expense_sources = tk.StringVar()
 
         def get_num_sources():
-            num_sources = int(num_income_sources.get())
-            income_label = tk.Label(input_window, text="Enter Income Sources:")
+            num_income = int(num_income_sources.get())
+            num_expense = int(num_expense_sources.get())
+
+            income_label = tk.Label(input_window, text="Enter the number of maximum sources (Income/Expense)")
             income_label.pack()
 
-            for i in range(num_sources):
+            for i in range(num_income):
                 income_entry = tk.Entry(input_window)
                 income_entry.pack()
                 income_entries.append(income_entry)
 
-            expense_label = tk.Label(input_window, text="Enter Expenses:")
+            expense_label = tk.Label(input_window, text="Enter the number of maximum sources (Income/Expense)")
             expense_label.pack()
 
-            for i in range(num_sources):
+            for i in range(num_expense):
                 expense_entry = tk.Entry(input_window)
                 expense_entry.pack()
                 expense_entries.append(expense_entry)
@@ -155,10 +158,16 @@ def get_choice():
         income_entries = []
         expense_entries = []
 
-        num_sources_label = tk.Label(input_window, text="Enter the number of income sources:")
+        num_sources_label = tk.Label(input_window, text="Enter the number of maximum sources (Income/Expense)")
         num_sources_label.pack()
 
         num_sources_entry = tk.Entry(input_window, textvariable=num_income_sources)
+        num_sources_entry.pack()
+
+        num_sources_label = tk.Label(input_window, text="Enter the number of maximum sources (Income/Expense)")
+        num_sources_label.pack()
+
+        num_sources_entry = tk.Entry(input_window, textvariable=num_expense_sources)
         num_sources_entry.pack()
 
         num_sources_button = tk.Button(input_window, text="Submit", command=get_num_sources)
