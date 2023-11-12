@@ -31,8 +31,8 @@ def calculate_cash_flow(income_list, expense_list):
     return cash_flow
 
 def get_choice():
-    selected_choice = variable.get()
-    if selected_choice == "Loan payment (Payment)":
+    choice = variable.get()
+    if choice == "Loan payment (Payment)":
         def calculate():
             interest_rate = interest_entry.get()
             loan_periods = periods_entry.get()
@@ -61,7 +61,7 @@ def get_choice():
         calculate_button = tk.Button(input_window, text="Calculate", command=calculate)
         calculate_button.pack()
 
-    elif selected_choice == "Bank Saving (Future Value)":
+    elif choice == "Bank Saving (Future Value)":
         def calculate_future():
             interest_rate = interest_entry.get()
             investment_periods = periods_entry.get()
@@ -96,7 +96,7 @@ def get_choice():
         calculate_future_button = tk.Button(future_window, text="Calculate", command=calculate_future)
         calculate_future_button.pack()
 
-    elif selected_choice == "Free Cash Flow Calculator":
+    elif choice == "Free Cash Flow Calculator":
         def calculate_free_cash_flow():
             income = []
             expenses = []
