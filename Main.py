@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
 
+income_entries = []
+expense_entries = []
+
 def calculate_pmt(rate, periods, present_value):
     try:
         monthly_rate = float(rate) / (12 * 100)
@@ -130,8 +133,24 @@ def get_choice():
 
         num_income_sources = tk.StringVar()
         num_expense_sources = tk.StringVar()
-
+        
         def get_num_sources():
+            global income_entries, expense_entries
+
+            # Destroy previous entries and specific labels
+            for entry in income_entries:
+                entry.destroy()
+            for entry in expense_entries:
+                entry.destroy()
+
+            for widget in input_window.winfo_children():
+                if widget.winfo_name() in ['income_label', 'expense_label', 'calculate_button']:
+                    widget.destroy()
+
+            # Clear the lists
+            income_entries = []
+            expense_entries = []
+
             try:
                 num_income = int(num_income_sources.get())
                 num_expense = int(num_expense_sources.get())
@@ -139,7 +158,7 @@ def get_choice():
                 messagebox.showerror("Error", "Please enter only positive integer number values.")
                 return None
 
-            income_label = tk.Label(input_window, text="Maximum income sources")
+            income_label = tk.Label(input_window, text="Maximum income sources", name='income_label')
             income_label.pack()
 
             for i in range(num_income):
@@ -147,7 +166,7 @@ def get_choice():
                 income_entry.pack()
                 income_entries.append(income_entry)
 
-            expense_label = tk.Label(input_window, text="Maximum expense sources")
+            expense_label = tk.Label(input_window, text="Maximum expense sources", name='expense_label')
             expense_label.pack()
 
             for i in range(num_expense):
@@ -155,23 +174,24 @@ def get_choice():
                 expense_entry.pack()
                 expense_entries.append(expense_entry)
 
-            calculate_button = tk.Button(input_window, text="Calculate", command=get_cashflow)
+            calculate_button = tk.Button(input_window, text="Calculate", name='calculate_button', command=get_cashflow)
             calculate_button.pack()
 
-        income_entries = []
-        expense_entries = []
 
-        num_sources_label = tk.Label(input_window, text="Enter the number of maximum income sources")
-        num_sources_label.pack()
+        num_income_sources = tk.StringVar()
+        num_expense_sources = tk.StringVar()
 
-        num_sources_entry = tk.Entry(input_window, textvariable=num_income_sources)
-        num_sources_entry.pack()
+        num_income_label = tk.Label(input_window, text="Enter the number of maximum income sources")
+        num_income_label.pack()
 
-        num_sources_label = tk.Label(input_window, text="Enter the number of maximum expense sources")
-        num_sources_label.pack()
+        num_income_entry = tk.Entry(input_window, textvariable=num_income_sources)
+        num_income_entry.pack()
 
-        num_sources_entry = tk.Entry(input_window, textvariable=num_expense_sources)
-        num_sources_entry.pack()
+        num_expense_label = tk.Label(input_window, text="Enter the number of maximum expense sources")
+        num_expense_label.pack()
+
+        num_expense_entry = tk.Entry(input_window, textvariable=num_expense_sources)
+        num_expense_entry.pack()
 
         num_sources_button = tk.Button(input_window, text="Submit", command=get_num_sources)
         num_sources_button.pack()
